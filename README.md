@@ -1,79 +1,83 @@
-# Consignes
+Voici la mise à jour de votre documentation pour ajouter la possibilité de se connecter à une base de données MariaDB :
 
-- Vous êtes développeur front-end : vous devez réaliser les consignes décrites dans le chapitre [Front-end](#Front-end)
+---
 
-- Vous êtes développeur back-end : vous devez réaliser les consignes décrites dans le chapitre [Back-end](#Back-end) (*)
+# API Produit - Application Spring Boot
 
-- Vous êtes développeur full-stack : vous devez réaliser les consignes décrites dans le chapitre [Front-end](#Front-end) et le chapitre [Back-end](#Back-end) (*)
+## Aperçu du Projet
 
-(*) Afin de tester votre API, veuillez proposer une stratégie de test appropriée.
+Cette application Spring Boot est conçue pour gérer un catalogue de produits avec des opérations CRUD utilisant des API RESTful. Les API permettent de créer, récupérer, mettre à jour et supprimer des produits, ainsi que d’obtenir les détails de produits spécifiques.
 
-## Front-end
+## Fonctionnalités
 
-Le site de e-commerce d'Alten a besoin de s'enrichir de nouvelles fonctionnalités.
+- Créer un nouveau produit
+- Récupérer tous les produits
+- Récupérer les détails d'un produit spécifique par ID
+- Mettre à jour les détails d'un produit
+- Supprimer un produit par ID
 
-### Partie 1 : Shop
+## Base de Données
 
-- Afficher toutes les informations pertinentes d'un produit sur la liste
-- Permettre d'ajouter un produit au panier depuis la liste 
-- Permettre de supprimer un produit du panier
-- Afficher un badge indiquant la quantité de produits dans le panier
-- Permettre de visualiser la liste des produits qui composent le panier.
+Le projet utilise **H2** comme base de données en mémoire à des fins de test, mais il prend également en charge la connexion à une base de données **MariaDB**.
 
-### Partie 2
+### Détails de la Base de Données H2 :
+- **URL** : `jdbc:h2:mem:testdb`
+- **Classe du Driver** : `org.h2.Driver`
+- **Nom d'utilisateur** : `admin`
+- **Mot de passe** : (Aucun mot de passe requis)
 
-- Créer un nouveau point de menu dans la barre latérale ("Contact")
-- Créer une page "Contact" affichant un formulaire
-- Le formulaire doit permettre de saisir son email, un message et de cliquer sur "Envoyer"
-- Email et message doivent être obligatoirement remplis, message doit être inférieur à 300 caractères.
-- Quand le message a été envoyé, afficher un message à l'utilisateur : "Demande de contact envoyée avec succès".
+Vous pouvez accéder à la console H2 à partir de l'URL suivante après avoir lancé l'application :
+http://localhost:8080/h2-console
 
-### Bonus : 
+- **URL JDBC** : `jdbc:h2:mem:testdb`
+- **Nom d'utilisateur** : `admin`
+- **Mot de passe** : (Laissez-le vide)
 
-- Ajouter un système de pagination et/ou de filtrage sur la liste des produits
-- On doit pouvoir visualiser et ajuster la quantité des produits depuis la liste et depuis le panier 
+### Configuration de la Base de Données MariaDB
 
-## Back-end
+Pour se connecter à une base de données **MariaDB** avec le nom d'utilisateur `root`, vous devez suivre ces étapes :
 
-Développer un back-end permettant la gestion de produits définis plus bas.
-Vous pouvez utiliser la technologie de votre choix parmi la liste suivante :
+1. **Dépendance Maven**  
+   Assurez-vous que votre fichier `pom.xml` contient la dépendance pour MariaDB. Ajoutez la dépendance suivante dans la section `<dependencies>` :
+   ```xml
+   <dependency>
+       <groupId>org.mariadb.jdbc</groupId>
+       <artifactId>mariadb-java-client</artifactId>
+       <version>3.0.0</version> <!-- ou la dernière version -->
+   </dependency>
+   ```
 
-- Node.js/Express
-- Java/Spring Boot
-- C#/.net Core
-- PHP/Symphony
+2. **Configuration dans application.properties**  
+   Ajoutez les configurations nécessaires dans le fichier `application.properties` pour se connecter à MariaDB. Voici un exemple :
+   ```properties
+   # Configuration de la base de données MariaDB
+   spring.datasource.url=jdbc:mariadb://localhost:3306/nom_de_votre_base_de_donnees
+   spring.datasource.username=root
+   spring.datasource.password=motdepasse # Remplacez par le mot de passe de l'utilisateur root
+   spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 
+   # Configuration JPA/Hibernate
+   spring.jpa.hibernate.ddl-auto=update # Ou "create" si vous souhaitez recréer la base de données à chaque démarrage
+   spring.jpa.show-sql=true # Pour afficher les requêtes SQL dans la console
+   ```
 
-Le back-end doit gérer les API suivantes : 
+3. **Créer la Base de Données**  
+   Avant de lancer l'application, assurez-vous que la base de données que vous avez spécifiée (`nom_de_votre_base_de_donnees`) existe dans MariaDB. Vous pouvez créer la base de données en utilisant le client MariaDB ou un outil comme phpMyAdmin :
+   ```sql
+   CREATE DATABASE nom_de_votre_base_de_donnees;
+   ```
 
-| Resource           | POST                  | GET                            | PATCH                                    | PUT | DELETE           |
-| ------------------ | --------------------- | ------------------------------ | ---------------------------------------- | --- | ---------------- |
-| **/products**      | Create a new product  | Retrieve all products          | X                                        | X   |     X            |
-| **/products/:id**  | X                     | Retrieve details for product 1 | Update details of product 1 if it exists | X   | Remove product 1 |
+### Exécution du Projet
 
-Un produit a les caractéristiques suivantes : 
+Pour exécuter le projet, suivez ces étapes :
 
-``` typescript
-class Product {
-  id: number;
-  code: string;
-  name: string;
-  description: string;
-  image: string;
-  category: string;
-  price: number;
-  quantity: number;
-  internalReference: string;
-  shellId: number;
-  inventoryStatus: "INSTOCK" | "LOWSTOCK" | "OUTOFSTOCK";
-  rating: number;
-  createdAt: number;
-  updatedAt: number;
-}
-```
+1. Clonez le dépôt.
+2. Assurez-vous d'avoir **Java 8 ou une version ultérieure** installé.
+3. Accédez au répertoire du projet et utilisez la commande suivante pour lancer l'application :
+   
+   ./mvnw spring-boot:run
+  
 
-Le back-end créé doit pouvoir gérer les produits dans une base de données SQL/NoSQL ou dans un fichier json.
+---
 
-## Bonus
-
-Vous pouvez ajouter des tests Postman ou Swagger pour valider votre API
+Cette documentation mise à jour fournit des instructions claires sur la façon de configurer et d'utiliser MariaDB avec votre application Spring Boot, en plus de la configuration H2 existante.
