@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "1cb81e84-decb-4c58-875e-08d9c7dd0094",
+		"name": "products_alten",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8265191"
+	},
+	"item": [
+		{
+			"name": "Retrieve all products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the number of iterations\r",
+							"const iterations = 10;\r",
+							"\r",
+							"// Define a delay function\r",
+							"function delay(milliseconds) {\r",
+							"    return new Promise(resolve => setTimeout(resolve, milliseconds));\r",
+							"}\r",
+							"\r",
+							"// Function to send the request\r",
+							"async function sendRequests() {\r",
+							"    for (let i = 0; i < iterations; i++) {\r",
+							"        // Send the request\r",
+							"        pm.sendRequest({\r",
+							"            url: 'http://localhost:9090/test', // Use your actual URL here\r",
+							"            method: \"GET\", // Change the method if needed\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            console.log(res);\r",
+							"        });\r",
+							"        \r",
+							"        // Delay between requests\r",
+							"        await delay(500); // Adjust delay as needed (1000 ms = 1 second)\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// Call the function to send requests\r",
+							"sendRequests();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the number of iterations\r",
+							"const iterations = 10;\r",
+							"\r",
+							"// Define a delay function\r",
+							"function delay(milliseconds) {\r",
+							"    return new Promise(resolve => setTimeout(resolve, milliseconds));\r",
+							"}\r",
+							"\r",
+							"// Function to send the request\r",
+							"async function sendRequests() {\r",
+							"    for (let i = 0; i < iterations; i++) {\r",
+							"        // Send the request\r",
+							"        pm.sendRequest({\r",
+							"            url: 'http://localhost:9090/test', // Use your actual URL here\r",
+							"            method: \"GET\", // Change the method if needed\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            console.log(res);\r",
+							"        });\r",
+							"        \r",
+							"        // Delay between requests\r",
+							"        await delay(500); // Adjust delay as needed (1000 ms = 1 second)\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// Call the function to send requests\r",
+							"sendRequests();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"code\": \"C001\",\r\n  \"name\": \"Camera\",\r\n  \"description\": \"camera 2mp.\",\r\n  \"image\": \"https://example.com/images/camera2mp.jpg\",\r\n  \"category\": \"Electronics\",\r\n  \"price\": 100.50,\r\n  \"quantity\": 2,\r\n  \"internalReference\": \"CAMERA-2MP\",\r\n  \"shellId\": 10,\r\n  \"inventoryStatus\": \"INSTOCK\",\r\n  \"rating\": 10,\r\n  \"createdAt\": \"2024-10-07T10:00:00\",\r\n  \"updatedAt\": \"2024-10-07T10:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve details for product 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the number of iterations\r",
+							"const iterations = 10;\r",
+							"\r",
+							"// Define a delay function\r",
+							"function delay(milliseconds) {\r",
+							"    return new Promise(resolve => setTimeout(resolve, milliseconds));\r",
+							"}\r",
+							"\r",
+							"// Function to send the request\r",
+							"async function sendRequests() {\r",
+							"    for (let i = 0; i < iterations; i++) {\r",
+							"        // Send the request\r",
+							"        pm.sendRequest({\r",
+							"            url: 'http://localhost:9090/test', // Use your actual URL here\r",
+							"            method: \"GET\", // Change the method if needed\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            console.log(res);\r",
+							"        });\r",
+							"        \r",
+							"        // Delay between requests\r",
+							"        await delay(500); // Adjust delay as needed (1000 ms = 1 second)\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// Call the function to send requests\r",
+							"sendRequests();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update details of product 1 if it exists",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the number of iterations\r",
+							"const iterations = 10;\r",
+							"\r",
+							"// Define a delay function\r",
+							"function delay(milliseconds) {\r",
+							"    return new Promise(resolve => setTimeout(resolve, milliseconds));\r",
+							"}\r",
+							"\r",
+							"// Function to send the request\r",
+							"async function sendRequests() {\r",
+							"    for (let i = 0; i < iterations; i++) {\r",
+							"        // Send the request\r",
+							"        pm.sendRequest({\r",
+							"            url: 'http://localhost:9090/test', // Use your actual URL here\r",
+							"            method: \"GET\", // Change the method if needed\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            console.log(res);\r",
+							"        });\r",
+							"        \r",
+							"        // Delay between requests\r",
+							"        await delay(500); // Adjust delay as needed (1000 ms = 1 second)\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// Call the function to send requests\r",
+							"sendRequests();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n  \"price\": 25.99,\r\n  \"quantity\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove product 1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the number of iterations\r",
+							"const iterations = 10;\r",
+							"\r",
+							"// Define a delay function\r",
+							"function delay(milliseconds) {\r",
+							"    return new Promise(resolve => setTimeout(resolve, milliseconds));\r",
+							"}\r",
+							"\r",
+							"// Function to send the request\r",
+							"async function sendRequests() {\r",
+							"    for (let i = 0; i < iterations; i++) {\r",
+							"        // Send the request\r",
+							"        pm.sendRequest({\r",
+							"            url: 'http://localhost:9090/test', // Use your actual URL here\r",
+							"            method: \"GET\", // Change the method if needed\r",
+							"            header: {\r",
+							"                \"Content-Type\": \"application/json\"\r",
+							"            }\r",
+							"        }, function (err, res) {\r",
+							"            console.log(res);\r",
+							"        });\r",
+							"        \r",
+							"        // Delay between requests\r",
+							"        await delay(500); // Adjust delay as needed (1000 ms = 1 second)\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"// Call the function to send requests\r",
+							"sendRequests();"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
